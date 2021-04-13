@@ -11,16 +11,17 @@ public class DragAndDrop : MonoBehaviour
 
     private GameObject table;
     private bool isOverTable = false;
+    private bool isOnTable = false;
 
     public void Start()
     {
         canvas = GameObject.Find("Canvas");
         table = GameObject.Find("Table");
-
     }
+
     public void onSelect()
     {
-        Debug.Log("onSelect");
+        if (isOnTable) return;//If we are on the table, just don't drag
 
         startZone = transform.parent.gameObject;
         startPosition = transform.position;
@@ -30,10 +31,12 @@ public class DragAndDrop : MonoBehaviour
 
     public void onDrop()
     {
-        Debug.Log("onDrop");
+        if (isOnTable) return;//Bug prevent for card on table
+
         if (isOverTable)
         {
             transform.SetParent(table.transform, false); //set le parent de l'objet( zone de depart)
+            isOnTable = true;
         }
         else
         {

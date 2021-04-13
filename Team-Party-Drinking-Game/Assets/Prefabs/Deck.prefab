@@ -227,3 +227,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Card: {fileID: 7534410714762638192, guid: 727e819159f835c459253cf43d1481ca, type: 3}
   Zone: {fileID: 0}
+  NumberOfCardDrawned: 5
