@@ -6,8 +6,7 @@ using UnityEngine;
 public class DrawCards : MonoBehaviour
 {
     public GameObject Card;
-    public GameObject PlayerZone;
-    public GameObject EnemyZone;
+    public GameObject Zone;
 
     void Start()
     {
@@ -17,10 +16,10 @@ public class DrawCards : MonoBehaviour
     public void OnClick()
     {
         Debug.Log("Clicked");
-        for(int i =0; i<5; i++)
+        for(int i = 0; i < 1; i++)
         {
             GameObject playerCard = Instantiate(Card, new Vector3(0, 0, 0), Quaternion.identity);
-            playerCard.transform.SetParent(PlayerZone.transform, false);
+            playerCard.transform.SetParent(Zone.transform, false);
         }
     }
 }
