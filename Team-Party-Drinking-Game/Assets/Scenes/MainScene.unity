@@ -379,5 +379,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 6663980676819236709, guid: d9c9b72e613aff54ab0f742ca5b1cec8, type: 3}
+      propertyPath: NumberOfCardDrawned
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9c9b72e613aff54ab0f742ca5b1cec8, type: 3}

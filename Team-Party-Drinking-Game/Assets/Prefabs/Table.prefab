@@ -100,7 +100,7 @@ MonoBehaviour:
   m_CellSize: {x: 120, y: 200}
   m_Spacing: {x: 20, y: 0}
   m_Constraint: 2
-  m_ConstraintCount: 2
+  m_ConstraintCount: 1
 --- !u!60 &-3107053756529042026
 PolygonCollider2D:
   m_ObjectHideFlags: 0
