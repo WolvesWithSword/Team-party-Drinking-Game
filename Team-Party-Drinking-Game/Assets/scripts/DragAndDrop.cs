@@ -5,49 +5,53 @@ using UnityEngine;
 
 public class DragAndDrop : MonoBehaviour
 {
-    private bool isDragged = false; //deplacer
-    private GameObject canvas;
+    private bool isDragged = false; //Drag en cours
 
-    private GameObject startZone;
     private Vector3 startPosition;
-    private int index;
+    private int startIndexLayer;
 
     private GameObject table;
+    private SpriteRenderer myRenderer;
     private bool isOverTable = false;
     private bool isOnTable = false;
 
+    private void Awake()
+    {
+        myRenderer = GetComponent<SpriteRenderer>();
+    }
+
     public void Start()
     {
-        canvas = GameObject.Find("Canvas");
+        //On retrouve la table
         table = GameObject.Find("Table");
     }
 
-    public void onSelect()
+    private void OnMouseDown()
     {
         if (isOnTable) return;//If we are on the table, just don't drag
 
-        startZone = transform.parent.gameObject;
+        startIndexLayer = myRenderer.sortingOrder;
+        //Don't mess with anything
+        myRenderer.sortingOrder = 100;
+
         startPosition = transform.position;
-        index = transform.GetSiblingIndex();//remember my position
-        isDragged = true;    
-    } 
-
-
-    public void onDrop()
+        isDragged = true;
+    }
+    
+    public void OnMouseUp()
     {
         if (isOnTable) return;//Bug prevent for card on table
 
         if (isOverTable)
         {
-            transform.SetParent(table.transform, false); //set le parent de l'objet( zone de depart)
             isOnTable = true;
+            table.GetComponentInChildren<HandsGrid>().addCard(gameObject);//table is now the parent
         }
         else
         {
-            transform.SetParent(startZone.transform, false); //set le parent de l'objet( zone de depart)
-            transform.SetSiblingIndex(index);//Son index
-            transform.position = startPosition;//Sa position
+            transform.position = startPosition;
         }
+        myRenderer.sortingOrder = startIndexLayer;
         isDragged = false;
     }
 
@@ -57,20 +61,26 @@ public class DragAndDrop : MonoBehaviour
     {
         if (isDragged)
         {
-            transform.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-            transform.SetParent(canvas.transform, false);
-            
+            //Mouse position
+            Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            pos.z = 0;
+            transform.position = pos;
         }
-       
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        isOverTable = true;
+        if(collision.gameObject.tag == "Table")
+        {
+            isOverTable = true;
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        isOverTable = false;
+        if (collision.gameObject.tag == "Table")
+        {
+            isOverTable = false;
+        }
     }
 }

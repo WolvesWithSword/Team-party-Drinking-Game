@@ -18,7 +18,6 @@ public class DrawCards : MonoBehaviour
 
     void OnMouseDown()
     {
-        Debug.Log("Sprite Clicked");
         for (int i = 0; i < NumberOfCardDrawned; i++)
         {
             GameObject playerCard = Instantiate(Card, new Vector3(0, 0, 0), Quaternion.identity);
