@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,8 +7,10 @@ public class DragAndDrop : MonoBehaviour
 {
     private bool isDragged = false; //deplacer
     private GameObject canvas;
+
     private GameObject startZone;
     private Vector3 startPosition;
+    private int index;
 
     private GameObject table;
     private bool isOverTable = false;
@@ -25,6 +28,7 @@ public class DragAndDrop : MonoBehaviour
 
         startZone = transform.parent.gameObject;
         startPosition = transform.position;
+        index = transform.GetSiblingIndex();//remember my position
         isDragged = true;    
     } 
 
@@ -41,7 +45,8 @@ public class DragAndDrop : MonoBehaviour
         else
         {
             transform.SetParent(startZone.transform, false); //set le parent de l'objet( zone de depart)
-            transform.position = startPosition;
+            transform.SetSiblingIndex(index);//Son index
+            transform.position = startPosition;//Sa position
         }
         isDragged = false;
     }

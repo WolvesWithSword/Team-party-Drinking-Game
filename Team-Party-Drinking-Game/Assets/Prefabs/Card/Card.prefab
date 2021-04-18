@@ -268,6 +268,18 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
+        - m_Target: {fileID: -4309898286206820502}
+          m_TargetAssemblyTypeName: ZoomCard, Assembly-CSharp
+          m_MethodName: onDragingBegin
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
         - m_Target: {fileID: -7301919064037138301}
           m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
           m_MethodName: onSelect
@@ -287,6 +299,18 @@ MonoBehaviour:
         - m_Target: {fileID: -7301919064037138301}
           m_TargetAssemblyTypeName: DragAndDrop, Assembly-CSharp
           m_MethodName: onDrop
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: -4309898286206820502}
+          m_TargetAssemblyTypeName: ZoomCard, Assembly-CSharp
+          m_MethodName: onDragingEnding
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

@@ -10,6 +10,7 @@ public class ZoomCard : MonoBehaviour
     private int index;
 
     private GameObject substitute;//Fake object in list
+    private bool isBeingDrag = false;
 
     private void Start()
     {
@@ -18,33 +19,51 @@ public class ZoomCard : MonoBehaviour
 
     public void onHoverCard()
     {
-        gameObject.transform.localScale = Vector3.Scale(gameObject.transform.localScale,new Vector3(2, 2, 2));// X2
-        gameObject.layer = LayerMask.NameToLayer("ZoomCard");
+        if (!isBeingDrag)
+        {
+            gameObject.transform.localScale = Vector3.Scale(gameObject.transform.localScale, new Vector3(2, 2, 2));// X2
+            gameObject.layer = LayerMask.NameToLayer("ZoomCard");
 
-        substitute = new GameObject("substitute",typeof(RectTransform));
-       
-        parentZone = transform.parent.gameObject;//remember my parent
-        index = transform.GetSiblingIndex();//remember my position
+            substitute = new GameObject("substitute", typeof(RectTransform));
 
-        //Made substitute fill the empty space
-        substitute.transform.SetParent(parentZone.transform, false);
-        substitute.transform.SetSiblingIndex(index);
+            parentZone = transform.parent.gameObject;//remember my parent
+            index = transform.GetSiblingIndex();//remember my position
 
-        gameObject.transform.SetParent(firstPlane.transform, true);
-        //Move a little bit upper
-        transform.position = new Vector3(transform.position.x, transform.position.y + 80, transform.position.z);
+            //Made substitute fill the empty space
+            substitute.transform.SetParent(parentZone.transform, false);
+            substitute.transform.SetSiblingIndex(index);
+
+            gameObject.transform.SetParent(firstPlane.transform, true);
+            //Move a little bit upper
+            transform.position = new Vector3(transform.position.x, transform.position.y + 80, transform.position.z);
+        }
     }
 
     public void onHoverCardLeft()
     {
-        gameObject.transform.localScale = Vector3.Scale(gameObject.transform.localScale, new Vector3(0.5f, 0.5f, 0.5f));// /2
-        gameObject.layer = LayerMask.NameToLayer("Card");
+        if (!isBeingDrag && parentZone != null)
+        {
+            gameObject.transform.localScale = Vector3.Scale(gameObject.transform.localScale, new Vector3(0.5f, 0.5f, 0.5f));// /2
+            gameObject.layer = LayerMask.NameToLayer("Card");
 
-        GameObject.Destroy(substitute);
+            GameObject.Destroy(substitute);
 
-        //Set last parent and position
-        gameObject.transform.SetParent(parentZone.transform, false);
-        transform.SetSiblingIndex(index);
-        transform.position = new Vector3(transform.position.x, transform.position.y - 80, transform.position.z);
+            //Set last parent and position
+            gameObject.transform.SetParent(parentZone.transform, false);
+            transform.SetSiblingIndex(index);
+            transform.position = new Vector3(transform.position.x, transform.position.y - 80, transform.position.z);
+        }
+    }
+
+    public void onDragingBegin()
+    {
+        onHoverCardLeft();
+        isBeingDrag = true;
+        parentZone = null;
+    }
+    
+    public void onDragingEnding()
+    {
+        isBeingDrag = false;
     }
 }
