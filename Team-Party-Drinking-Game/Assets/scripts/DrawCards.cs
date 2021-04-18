@@ -7,14 +7,22 @@ public class DrawCards : MonoBehaviour
 {
     public GameObject Card;
     public GameObject Zone;
+    private HandsGrid grid;
+
     public int NumberOfCardDrawned;
 
-    public void OnClick()
+    private void Start()
     {
-        for(int i = 0; i < NumberOfCardDrawned; i++)
+        grid = Zone.GetComponent<HandsGrid>();
+    }
+
+    void OnMouseDown()
+    {
+        Debug.Log("Sprite Clicked");
+        for (int i = 0; i < NumberOfCardDrawned; i++)
         {
             GameObject playerCard = Instantiate(Card, new Vector3(0, 0, 0), Quaternion.identity);
-            playerCard.transform.SetParent(Zone.transform, false);
+            grid.addCard(playerCard);
         }
     }
 }

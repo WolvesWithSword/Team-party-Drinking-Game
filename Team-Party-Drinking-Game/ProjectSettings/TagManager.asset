@@ -41,6 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: PlayerZone
+    uniqueID: 1783569941
+    locked: 0
+  - name: Table
+    uniqueID: 669760685
+    locked: 0
   - name: Card
     uniqueID: 168917323
     locked: 0
